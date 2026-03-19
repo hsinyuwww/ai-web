@@ -119,14 +119,14 @@ export default function SkildAIWebsite() {
         </div>
 
         <div className="relative z-10 flex flex-col items-center justify-center max-w-5xl mx-auto w-full">
-          <div className="text-center mb-12">
-            <div className="text-4xl md:text-2xl font-black text-gray-900 mb-1">
+          <div className="text-center mb-10">
+            <div className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-1 leading-tight">
               Avant Robotics AI Solution
             </div>
-            <div className="text-3xl md:text-2xl font-light text-gray-400 mb-1">
+            <div className="text-3xl md:text-4xl font-bold text-gray-400 mb-1 leading-tight">
               Reduce downtime and costs through
             </div>
-            <div className="text-3xl md:text-2xl font-light text-gray-400">
+            <div className="text-3xl md:text-4xl font-bold text-gray-400 leading-tight">
               continuous AI-driven monitoring
             </div>
           </div>
@@ -159,9 +159,9 @@ export default function SkildAIWebsite() {
       {/* DEMO CAROUSEL */}
       <section className="py-20 px-6 bg-gradient-to-b from-white via-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900">
-              <span className="text-gray-500">Avant Robotics AI Solution in</span>
+          <div className="text-center mb-6">
+            <h2 className="text-3xl md:text-4xl font-black leading-tight text-gray-900">
+              <span className="text-gray-400">Avant Robotics AI Solution in</span>
               <span className="block text-gray-900">Action</span>
             </h2>
           </div>
@@ -208,10 +208,10 @@ export default function SkildAIWebsite() {
           </div>
 
           <div className="mt-8 text-center space-y-4">
-            <h3 className="text-3xl md:text-4xl font-black text-gray-900">
+            <h3 className="text-2xl md:text-3xl font-black text-gray-900">
               {demoSlides[currentDemoSlide].title}
             </h3>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
               {demoSlides[currentDemoSlide].description}
             </p>
           </div>
@@ -239,7 +239,7 @@ export default function SkildAIWebsite() {
             Trusted by Industry Leaders
           </h2>
           <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
-            Join hundreds of companies that have partnered with AUTEL
+            Join hundreds of companies that have partnered with AVANT
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 items-center justify-center">
