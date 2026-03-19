@@ -66,7 +66,7 @@ export default function SkildAIWebsite() {
     setIsAutoPlay(false);
   };
 
-  const goToSlide = (index) => {
+  const goToSlide = (index: number) => {
     setCurrentDemoSlide(index);
     setIsAutoPlay(false);
   };
