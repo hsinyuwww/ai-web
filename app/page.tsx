@@ -19,7 +19,8 @@ export default function SkildAIWebsite() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scale = 1 + scrollY / 1000;
+  const maxScale = 1.18;
+  const scale = Math.min(maxScale, 1 + scrollY / 3000);
   const translateY = scrollY * 0.5;
 
   
@@ -74,7 +75,7 @@ export default function SkildAIWebsite() {
   return (
     <div className="bg-white text-gray-900 overflow-hidden">
       {/* NAVBAR */}
-      <nav className="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-gray-200">
+      <nav className="fixed w-full top-0 z-50 bg-white border-b border-gray-200">
         <div className="max-w-full mx-0 px-4 py-2 flex justify-between items-center">
           {/* Logo - 左邊 */}
           <div className="flex items-center flex-shrink-0">
@@ -101,7 +102,7 @@ export default function SkildAIWebsite() {
         </div>
 
         {isMenuOpen && (
-          <div className="md:hidden bg-white/90 border-t border-gray-200 px-6 py-4 space-y-4">
+          <div className="md:hidden bg-white border-t border-gray-200 px-6 py-4 space-y-4">
             <a href="#" className="block text-sm font-medium hover:text-blue-600">Blogs</a>
             <a href="#" className="block text-sm font-medium hover:text-blue-600">Careers</a>
           </div>
@@ -119,11 +120,11 @@ export default function SkildAIWebsite() {
         </div>
 
         <div className="relative z-10 flex flex-col items-center justify-center max-w-5xl mx-auto w-full">
-          <div className="text-center mb-10">
-            <div className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-1 leading-tight">
+          <div className="text-center mb-10 space-y-0">
+            <div className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
               Avant Robotics AI Solution
             </div>
-            <div className="text-3xl md:text-4xl font-bold text-gray-400 mb-1 leading-tight">
+            <div className="text-3xl md:text-4xl font-bold text-gray-400 leading-tight">
               Reduce downtime and costs through
             </div>
             <div className="text-3xl md:text-4xl font-bold text-gray-400 leading-tight">
@@ -153,7 +154,7 @@ export default function SkildAIWebsite() {
           </div>
         </div>
 
-        <div className="h-96"></div>
+        <div className="h-24"></div>
       </section>
 
       {/* DEMO CAROUSEL */}
