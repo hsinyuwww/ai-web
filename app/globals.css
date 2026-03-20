@@ -24,3 +24,32 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+html {
+  background: var(--background);
+}
+
+@layer utilities {
+  .hero-title {
+    @apply text-6xl font-extrabold tracking-tight leading-[1.12] text-slate-50;
+    font-size: clamp(3rem, 6vw, 4rem);
+  }
+
+  .hero-subtitle {
+    @apply text-3xl font-light leading-[1.6] text-slate-200;
+    font-size: clamp(1.625rem, 3.2vw, 2.375rem);
+  }
+
+  .hero-cta {
+    @apply inline-flex items-center justify-center rounded-lg font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/30;
+  }
+
+
+  .hero-cta-primary {
+    @apply inline-flex items-center justify-center rounded-lg font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/30 bg-blue-600 text-slate-50 px-7 py-3 hover:bg-blue-700;
+  }
+
+  .hero-cta-secondary {
+    @apply inline-flex items-center justify-center rounded-lg font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/30 border border-slate-200/20 bg-white/10 text-slate-50 px-7 py-3 hover:bg-white/15;
+  }
+}

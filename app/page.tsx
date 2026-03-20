@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronRight, Menu, X, ChevronLeft } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function SkildAIWebsite() {
   const [scrollY, setScrollY] = useState(0);
@@ -19,11 +20,8 @@ export default function SkildAIWebsite() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const maxScale = 1.18;
-  const scale = Math.min(maxScale, 1 + scrollY / 3000);
+  const scale = Math.min(1.16, 1 + scrollY / 1400);
   const translateY = scrollY * 0.5;
-
-  
 
   const demoSlides = [
     {
@@ -72,12 +70,29 @@ export default function SkildAIWebsite() {
     setIsAutoPlay(false);
   };
 
+  // Animation variants
+  const sponsorContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+    }
+  };
+
+  const sponsorItemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.5 } }
+  };
+
+  const sponsorHoverVariants = {
+    hover: { scale: 1.05, transition: { duration: 0.3 } }
+  };
+
   return (
     <div className="bg-white text-gray-900 overflow-hidden">
       {/* NAVBAR */}
       <nav className="fixed w-full top-0 z-50 bg-white border-b border-gray-200">
         <div className="max-w-full mx-0 px-4 py-2 flex justify-between items-center">
-          {/* Logo - 左邊 */}
           <div className="flex items-center flex-shrink-0">
             <img 
               src="/logo.png"
@@ -86,13 +101,11 @@ export default function SkildAIWebsite() {
             />
           </div>
           
-          {/* 導航菜單 - 右邊 */}
           <div className="hidden md:flex gap-8 items-center">
             <a href="#" className="text-sm font-medium text-gray-900 hover:text-blue-600 transition">Blogs</a>
             <a href="#" className="text-sm font-medium text-gray-900 hover:text-blue-600 transition">Careers</a>
           </div>
 
-          {/* 漢堡菜單 - 最右邊 */}
           <button 
             className="md:hidden flex-shrink-0"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -120,7 +133,12 @@ export default function SkildAIWebsite() {
         </div>
 
         <div className="relative z-10 flex flex-col items-center justify-center max-w-5xl mx-auto w-full">
-          <div className="text-center mb-10 space-y-0">
+          <motion.div 
+            className="text-center mb-10 space-y-0"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+          >
             <div className="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
               Avant Robotics AI Solution
             </div>
@@ -130,9 +148,9 @@ export default function SkildAIWebsite() {
             <div className="text-3xl md:text-4xl font-bold text-gray-400 leading-tight">
               continuous AI-driven monitoring
             </div>
-          </div>
+          </motion.div>
 
-          <div className="w-full relative mb-8">
+          <div className="w-full max-w-6xl relative mb-8">
             <div
               className="relative w-full rounded-3xl overflow-hidden shadow-2xl border-4 border-gray-300"
               style={{
@@ -160,22 +178,29 @@ export default function SkildAIWebsite() {
       {/* DEMO CAROUSEL */}
       <section className="py-20 px-6 bg-gradient-to-b from-white via-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-6">
+          <motion.div 
+            className="text-center mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
             <h2 className="text-3xl md:text-4xl font-black leading-tight text-gray-900">
               <span className="text-gray-400">Avant Robotics AI Solution in</span>
               <span className="block text-gray-900">Action</span>
             </h2>
-          </div>
+          </motion.div>
 
           <div className="relative rounded-3xl overflow-hidden border-4 border-gray-300 w-full max-w-4xl mx-auto group shadow-lg" 
   style={{ aspectRatio: '16/9' }}
 >
             {demoSlides.map((slide, idx) => (
-              <div
+              <motion.div
                 key={slide.id}
-                className={`absolute inset-0 transition-opacity duration-700 ${
-                  idx === currentDemoSlide ? 'opacity-100' : 'opacity-0'
-                }`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: idx === currentDemoSlide ? 1 : 0 }}
+                transition={{ duration: 0.6, ease: 'easeInOut' }}
+                className="absolute inset-0"
               >
                <video
                 autoPlay
@@ -190,38 +215,50 @@ export default function SkildAIWebsite() {
               <div className="absolute top-6 left-6 text-gray-900 text-sm font-bold opacity-70 bg-white/80 px-3 py-1 rounded-full">
                 ◆ Avant Robotics
               </div>
-            </div>
+            </motion.div>
           ))}
 
-            <button
+            <motion.button
               onClick={handlePrev}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
               className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 hover:bg-white border-2 border-gray-300 transition-all group-hover:block hidden shadow-md"
             >
               <ChevronLeft size={28} className="text-gray-900" />
-            </button>
+            </motion.button>
 
-            <button
+            <motion.button
               onClick={handleNext}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
               className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 hover:bg-white border-2 border-gray-300 transition-all group-hover:block hidden shadow-md"
             >
               <ChevronRight size={28} className="text-gray-900" />
-            </button>
+            </motion.button>
           </div>
 
-          <div className="mt-8 text-center space-y-4">
+          <motion.div
+            key={currentDemoSlide}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mt-8 text-center space-y-4"
+          >
             <h3 className="text-2xl md:text-3xl font-black text-gray-900">
               {demoSlides[currentDemoSlide].title}
             </h3>
             <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">
               {demoSlides[currentDemoSlide].description}
             </p>
-          </div>
+          </motion.div>
 
           <div className="flex justify-center gap-3 mt-8">
             {demoSlides.map((_, idx) => (
-              <button
+              <motion.button
                 key={idx}
                 onClick={() => goToSlide(idx)}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.95 }}
                 className={`h-3 rounded-full transition-all ${
                   idx === currentDemoSlide
                     ? 'bg-gray-900 w-12'
@@ -236,14 +273,28 @@ export default function SkildAIWebsite() {
       {/* SPONSORS */}
       <section className="py-20 px-6 bg-white border-y border-gray-200">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-black text-center mb-4 text-gray-900">
-            Trusted by Industry Leaders
-          </h2>
-          <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
-            Join hundreds of companies that have partnered with AVANT
-          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-black text-center mb-4 text-gray-900">
+              Trusted by Industry Leaders
+            </h2>
+            <p className="text-center text-gray-600 max-w-2xl mx-auto">
+              Join hundreds of companies that have partnered with AVANT
+            </p>
+          </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 items-center justify-center">
+          <motion.div
+            variants={sponsorContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 items-center justify-center"
+          >
             {[
               { name: 'Company A', logo: '🏢' },
               { name: 'Company B', logo: '🏭' },
@@ -256,40 +307,59 @@ export default function SkildAIWebsite() {
               { name: 'Company I', logo: '💡' },
               { name: 'Company J', logo: '🌐' }
             ].map((sponsor, i) => (
-              <div
+              <motion.div
                 key={i}
+                variants={sponsorItemVariants}
+                whileHover="hover"
                 className="flex items-center justify-center p-6 rounded-xl bg-gray-50 border-2 border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-all duration-300 group cursor-pointer shadow-sm"
               >
-                <div className="text-center">
-                  <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">{sponsor.logo}</div>
+                <motion.div 
+                  className="text-center"
+                  variants={sponsorHoverVariants}
+                >
+                  <div className="text-4xl mb-3">{sponsor.logo}</div>
                   <p className="text-sm font-medium text-gray-700 group-hover:text-blue-600 transition">{sponsor.name}</p>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           <div className="text-center mt-16">
             <p className="text-gray-600 mb-6">Ready to join the revolution?</p>
-            <button className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-bold hover:shadow-xl hover:shadow-blue-600/30 transition-all inline-flex items-center gap-2">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-bold hover:shadow-xl hover:shadow-blue-600/30 transition-all inline-flex items-center gap-2"
+            >
               Become a Partner <ChevronRight size={20} />
-            </button>
+            </motion.button>
           </div>
         </div>
       </section>
 
       {/* CTA */}
       <section className="py-20 px-6 bg-gradient-to-r from-blue-50 via-white to-blue-50 border-y border-gray-200">
-        <div className="max-w-3xl mx-auto text-center">
+        <motion.div 
+          className="max-w-3xl mx-auto text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
           <h2 className="text-4xl md:text-5xl font-black mb-6 text-gray-900">
             Ready to Transform?
           </h2>
           <p className="text-lg text-gray-600 mb-10">
             Join thousands of companies using our AI solutions
           </p>
-          <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-bold text-lg hover:shadow-2xl hover:shadow-blue-600/40 transition-all inline-flex items-center gap-2">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg font-bold text-lg hover:shadow-2xl hover:shadow-blue-600/40 transition-all inline-flex items-center gap-2"
+          >
             Get Started <ChevronRight size={20} />
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
       </section>
 
       {/* FOOTER */}
